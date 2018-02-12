@@ -10,19 +10,23 @@ def get_user_login():
 
 
 def get_user_password():
-    password = input("Введите пароль")
+    password = input("Введите пароль: ")
     return password
 
 
 def get_online_friends(login, password):
-    session = vk.AuthSession(
+    auth_session = vk.AuthSession(
         app_id=APP_ID,
         user_login=login,
         user_password=password,
-        scope = "friends"
+        scope="friends"
     )
+    access_token = auth_session.get_access_token()
+    print(access_token)
+    session = vk.Session(access_token=access_token)
+
     api = vk.API(session)
-    api.friends.getOnline()
+    #api.friends.getOnline()
     
     # например, api.friends.get()
 

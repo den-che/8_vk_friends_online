@@ -11,7 +11,8 @@ def get_user_login():
 
 
 def get_user_password():
-    password = input("Введите пароль: ")
+    #password = input("Введите пароль: ")
+    password = getpass.getpass()
     return password
 
 
@@ -20,14 +21,16 @@ def get_online_friends(login, password):
             app_id=APP_ID,
             user_login=login,
             user_password=password,
-            scope='friends'
+            scope={'friends', 'users'},
+        
         )
 
         api = vk.API(auth_session)
         friends_list = api.friends.getOnline()
         print(friends_list)
         for id in friends_list:
-            friend = api.friends.get(user_id=id, fields='name')
+            print(id)
+            friend = api.users.get(user_ids=id, fields = "screen_name")
             print(friend)
 
 def output_friends_to_console(friends_online):

@@ -11,12 +11,13 @@ def get_user_login():
 
 
 def get_user_password():
-    #password = input("Введите пароль: ")
-    password = getpass.getpass()
+    password = getpass.getpass(prompt="Пароль: ")
     return password
 
 
 def get_online_friends(login, password):
+        friends_dict = {}
+
         auth_session = vk.AuthSession(
             app_id=APP_ID,
             user_login=login,
@@ -27,14 +28,15 @@ def get_online_friends(login, password):
 
         api = vk.API(auth_session)
         friends_list = api.friends.getOnline()
-        print(friends_list)
-        for id in friends_list:
-            print(id)
-            friend = api.users.get(user_ids=id, fields = "screen_name")
-            print(friend)
+        friends_dict = api.users.get(user_ids=friends_list, fields = "first_name, last_name")
+        return friends_dict
+        
 
 def output_friends_to_console(friends_online):
-    pass
+    print("Все друзья которые онлайн")
+    print("__________________________\n")
+    for friend in friends_online:
+        print ('{} {}\n'.format(friend['first_name'],friend['last_name']))
 
 if __name__ == '__main__':
     login = get_user_login()

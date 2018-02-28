@@ -1,6 +1,6 @@
 # Watcher of Friends Online
 
-[TODO. There will be project description]
+This script shows all online friends which is online. Just input login and password from your profile.
 
 # How to Install
 
@@ -14,4 +14,4 @@ Remember, it is recommended to use [virtualenv/venv](https://devman.org/encyclop
 
 # Project Goals
 
-The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
+The code is written for educational purposes.
